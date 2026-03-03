@@ -1,0 +1,128 @@
+/* ═══════════════════════════════════════════════════
+   ANIMATIONS — All keyframes and motion classes
+   ═══════════════════════════════════════════════════ */
+
+/* ─── Page transitions ─── */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ─── Avatar ─── */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-7px); }
+}
+
+/* ─── Quest completed ─── */
+
+@keyframes questPop {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(1.06); box-shadow: 0 0 30px var(--neon); }
+  100% { transform: scale(1); }
+}
+
+/* ─── Level up ─── */
+
+@keyframes levelPulse {
+  0%   { transform: scale(0.4); opacity: 0; }
+  60%  { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ─── Achievement unlock ─── */
+
+@keyframes unlockPop {
+  0%   { transform: scale(0.8); }
+  60%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* ─── Toast ─── */
+
+@keyframes toastIn {
+  from { transform: translateX(110%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+@keyframes toastOut {
+  from { transform: translateX(0);    opacity: 1; }
+  to   { transform: translateX(110%); opacity: 0; }
+}
+
+/* ─── Confetti ─── */
+
+@keyframes confettiFall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* ─── Fire streak ─── */
+
+@keyframes fireShake {
+  from { transform: rotate(-5deg) scale(1); }
+  to   { transform: rotate(5deg)  scale(1.12); }
+}
+
+/* ─── XP bar pulse ─── */
+
+@keyframes xpPulse {
+  0%  { box-shadow: 0 0 8px var(--neon); }
+  50% { box-shadow: 0 0 20px var(--neon); }
+  100%{ box-shadow: 0 0 8px var(--neon); }
+}
+
+.xp-bar__fill--animating {
+  animation: xpPulse 1s ease 3;
+}
+
+/* ─── Glow pulse (generic) ─── */
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: var(--glow); }
+  50%       { box-shadow: 0 0 40px rgba(168, 85, 247, 0.7); }
+}
+
+/* ─── Shimmer ─── */
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+/* ─── Spin ─── */
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ─── Bounce in ─── */
+
+@keyframes bounceIn {
+  0%   { transform: scale(0.3); opacity: 0; }
+  50%  { transform: scale(1.05); }
+  70%  { transform: scale(0.95); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ─── Utility animation classes ─── */
+
+.anim-fade-in     { animation: fadeIn   var(--transition-slow) ease; }
+.anim-fade-in-up  { animation: fadeInUp var(--transition-slow) ease; }
+.anim-scale-in    { animation: scaleIn  var(--transition-bounce); }
+.anim-bounce-in   { animation: bounceIn var(--transition-bounce); }

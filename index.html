@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="HabitHero — геймифицированный RPG-трекер привычек" />
+  <title>HabitHero — трекер привычек ⚔️</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ─── Styles (load order matters) ─── -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       SCREEN: Character Creation
+       Shown only to first-time users.
+  ═════════════════════════════════════════════════ -->
+  <div id="screen-create" class="screen screen-create" role="main" aria-label="Создание персонажа"></div>
+
+  <!-- ══════════════════════════════════════════════
+       SCREEN: Main Application
+       Hidden until character is created / loaded.
+  ═════════════════════════════════════════════════ -->
+  <div id="screen-app" class="screen screen-app" role="main" aria-label="Приложение HabitHero">
+
+    <!-- Navigation -->
+    <nav id="nav" class="nav" role="navigation" aria-label="Основная навигация"></nav>
+
+    <!-- ── Page: Home ── -->
+    <div id="page-home" class="page page--active" role="tabpanel" aria-label="Главная">
+      <div id="profile-card-container"></div>
+      <div id="streak-banner-container"></div>
+      <div id="quest-board-container"></div>
+    </div>
+
+    <!-- ── Page: Achievements ── -->
+    <div id="page-achievements" class="page" role="tabpanel" aria-label="Достижения"></div>
+
+    <!-- ── Page: Shop ── -->
+    <div id="page-shop" class="page" role="tabpanel" aria-label="Магазин"></div>
+
+  </div><!-- /screen-app -->
+
+
+  <!-- ════════════════════════════════════════════════
+       JAVASCRIPT — load order = dependency order
+  ════════════════════════════════════════════════ -->
+
+  <!-- 1. Static data -->
+  <script src="js/data/habits.js"></script>
+  <script src="js/data/achievements.js"></script>
+  <script src="js/data/shopItems.js"></script>
+
+  <!-- 2. Models -->
+  <script src="js/models/Character.js"></script>
+
+  <!-- 3. Services (pure logic, no DOM) -->
+  <script src="js/services/StorageService.js"></script>
+  <script src="js/services/XPService.js"></script>
+  <script src="js/services/StreakService.js"></script>
+  <script src="js/services/AchievementService.js"></script>
+
+  <!-- 4. State container -->
+  <script src="js/store/Store.js"></script>
+
+  <!-- 5. UI primitives -->
+  <script src="js/components/Component.js"></script>
+  <script src="js/components/Toast.js"></script>
+  <script src="js/components/Confetti.js"></script>
+  <script src="js/components/Modal.js"></script>
+
+  <!-- 6. Page-level components -->
+  <script src="js/components/Navigation.js"></script>
+  <script src="js/components/ProfileCard.js"></script>
+  <script src="js/components/StreakBanner.js"></script>
+  <script src="js/components/QuestBoard.js"></script>
+  <script src="js/components/AchievementsPage.js"></script>
+  <script src="js/components/ShopPage.js"></script>
+  <script src="js/components/CharacterCreation.js"></script>
+
+  <!-- 7. Application root (bootstraps everything) -->
+  <script src="js/app.js"></script>
+
+</body>
+</html>
