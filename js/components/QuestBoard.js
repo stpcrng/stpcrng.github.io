@@ -1,12 +1,6 @@
-/**
- * @class QuestBoard
- * @extends Component
- * @description Renders the daily quests grid and handles completion.
- * Emits 'quest:completed' with { habitId } on the root element.
- */
+
 class QuestBoard extends Component {
 
-  /** @param {string} container @param {Store} store */
   constructor(container, store) {
     super(container);
     this._store = store;
@@ -20,14 +14,14 @@ class QuestBoard extends Component {
       return this.#cardHTML(habit, done);
     }).join('');
 
-    return /* html */`
+    return `
       <div class="section-title">⚔️ Ежедневные квесты</div>
       <div class="quests-grid">${cards}</div>
     `;
   }
 
   #cardHTML(habit, done) {
-    return /* html */`
+    return `
       <article
         class="quest-card ${done ? 'quest-card--completed' : ''}"
         id="quest-card-${habit.id}"
@@ -60,10 +54,6 @@ class QuestBoard extends Component {
     });
   }
 
-  /**
-   * Mark a quest card as completed without a full re-render.
-   * @param {string} habitId
-   */
   markCompleted(habitId) {
     const card = this.$(`#quest-card-${habitId}`);
     const btn  = this.$(`[data-habit="${habitId}"]`);

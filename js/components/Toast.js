@@ -1,17 +1,9 @@
-/**
- * @class Toast
- * @description Singleton toast notification manager.
- * Creates a fixed overlay container and queues notifications.
- *
- * Usage:
- *   Toast.show('You did it! +20 XP', 'xp');
- */
+
 class Toast {
 
   static #container = null;
   static #DURATION  = 2800;
 
-  /** Lazily create the container once. */
   static #getContainer() {
     if (!this.#container) {
       this.#container = document.createElement('div');
@@ -21,12 +13,6 @@ class Toast {
     return this.#container;
   }
 
-  /**
-   * Show a toast message.
-   * @param {string} message
-   * @param {'xp'|'gold'|'ach'|'err'|''} type
-   * @param {number} [delay=0] ms before showing (for sequential toasts)
-   */
   static show(message, type = '', delay = 0) {
     setTimeout(() => this.#create(message, type), delay);
   }
@@ -40,7 +26,6 @@ class Toast {
 
     container.appendChild(el);
 
-    // Auto-dismiss
     const timer = setTimeout(() => this.#dismiss(el), this.#DURATION);
 
     el.addEventListener('click', () => {

@@ -1,11 +1,6 @@
-/**
- * @class StreakBanner
- * @extends Component
- * @description Displays the daily streak with milestone markers.
- */
+
 class StreakBanner extends Component {
 
-  /** @param {string} container @param {Store} store */
   constructor(container, store) {
     super(container);
     this._store = store;
@@ -18,7 +13,7 @@ class StreakBanner extends Component {
       ? `Так держать! Ты на подъеме! 🔥`
       : 'Выполни квест, чтобы начать серию!';
 
-    return /* html */`
+    return `
       <div class="streak-banner">
         <span class="streak-banner__fire">🔥</span>
         <div class="streak-banner__body">

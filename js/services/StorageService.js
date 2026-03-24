@@ -1,16 +1,8 @@
-/**
- * @class StorageService
- * @description Thin wrapper around localStorage.
- * All persistence goes through here — a single place to swap storage backends.
- */
+
 class StorageService {
 
   static #KEY = 'habithero_v2';
 
-  /**
-   * Persist a Character instance.
-   * @param {Character} character
-   */
   static save(character) {
     try {
       localStorage.setItem(this.#KEY, JSON.stringify(character.toJSON()));
@@ -19,10 +11,6 @@ class StorageService {
     }
   }
 
-  /**
-   * Load and deserialise the stored character.
-   * @returns {Character|null} null if nothing stored yet
-   */
   static load() {
     try {
       const raw = localStorage.getItem(this.#KEY);
@@ -34,9 +22,6 @@ class StorageService {
     }
   }
 
-  /**
-   * Wipe all stored data for this app.
-   */
   static clear() {
     try {
       localStorage.removeItem(this.#KEY);
@@ -45,10 +30,6 @@ class StorageService {
     }
   }
 
-  /**
-   * Check whether persisted data exists.
-   * @returns {boolean}
-   */
   static hasData() {
     return Boolean(localStorage.getItem(this.#KEY));
   }
