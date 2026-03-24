@@ -1,14 +1,8 @@
-/**
- * @class Navigation
- * @extends Component
- * @description App navigation bar.
- * Emits 'nav:change' with { page } on tab click.
- */
+
 class Navigation extends Component {
 
   #currentPage;
 
-  /** @param {string} container  @param {string} initialPage */
   constructor(container, initialPage = 'home') {
     super(container);
     this.#currentPage = initialPage;
@@ -17,7 +11,7 @@ class Navigation extends Component {
   get currentPage() { return this.#currentPage; }
 
   template() {
-    return /* html */`
+    return `
       <div class="nav__logo">HabitHero</div>
       <div class="nav__tabs" role="tablist">
         ${this.#tabs()}
@@ -32,7 +26,7 @@ class Navigation extends Component {
       { id: 'shop',         icon: '🛒', label: 'Магазин'      },
     ];
 
-    return tabs.map(t => /* html */`
+    return tabs.map(t => `
       <button
         class="nav__tab ${t.id === this.#currentPage ? 'nav__tab--active' : ''}"
         data-page="${t.id}"
@@ -50,7 +44,7 @@ class Navigation extends Component {
         const page = btn.dataset.page;
         if (page === this.#currentPage) return;
         this.#currentPage = page;
-        this.render(); // re-render to update active state
+        this.render();
         this.emit('nav:change', { page });
       });
     });

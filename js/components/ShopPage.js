@@ -1,12 +1,6 @@
-/**
- * @class ShopPage
- * @extends Component
- * @description Renders the shop and handles purchases.
- * Emits 'shop:purchase' with { itemId } on the root element.
- */
+
 class ShopPage extends Component {
 
-  /** @param {string} container @param {Store} store */
   constructor(container, store) {
     super(container);
     this._store = store;
@@ -15,7 +9,7 @@ class ShopPage extends Component {
   template() {
     const { gold } = this._store.getCharacter();
 
-    return /* html */`
+    return `
       <div class="page-header">
         <h2 class="page-header__title">Магазин</h2>
         <div class="gold-display">🪙 <span>${gold}</span></div>
@@ -31,7 +25,7 @@ class ShopPage extends Component {
     const owned = char.purchases.includes(item.id);
     const canBuy = char.gold >= item.cost && !owned;
 
-    return /* html */`
+    return `
       <article
         class="shop-card ${owned ? 'shop-card--owned' : ''}"
         aria-label="${item.name}"
