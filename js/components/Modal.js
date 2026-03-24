@@ -1,17 +1,10 @@
-/**
- * @class Modal
- * @description Manages all modal windows in the application.
- *
- * Injects its own HTML into the DOM once, then reuses it.
- * Supports a queue so multiple modals don't overlap.
- */
+
 class Modal {
 
   static #overlay   = null;
   static #queue     = [];
   static #isShowing = false;
 
-  /** Bootstrap: inject modal HTML and bind close key. */
   static init() {
     const wrapper = document.createElement('div');
     wrapper.innerHTML = this.#html();
@@ -19,28 +12,19 @@ class Modal {
 
     this.#overlay = document.getElementById('modal-overlay');
 
-    // Close on overlay-backdrop click
     this.#overlay.addEventListener('click', e => {
       if (e.target === this.#overlay) this.close();
     });
 
-    // Close on Escape key
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && this.#isShowing) this.close();
     });
 
-    // Bind the close button (delegated)
     this.#overlay.addEventListener('click', e => {
       if (e.target.closest('[data-modal-close]')) this.close();
     });
   }
 
-  // ─── Public ─────────────────────────────────────────
-
-  /**
-   * Show the "LEVEL UP!" modal.
-   * @param {number} level
-   */
   static showLevelUp(level) {
     this.#enqueue(() => {
       document.getElementById('modal-icon').textContent   = '⚔️';
@@ -54,10 +38,6 @@ class Modal {
     });
   }
 
-  /**
-   * Show an achievement-unlocked modal.
-   * @param {{ icon:string, name:string, desc:string, secret?:boolean }} def
-   */
   static showAchievement(def) {
     this.#enqueue(() => {
       const isSecret = def.secret;
@@ -75,15 +55,11 @@ class Modal {
     });
   }
 
-  /** Close the currently-shown modal and process the queue. */
   static close() {
     this.#overlay.classList.remove('modal-overlay--visible');
     this.#isShowing = false;
-    // Process next in queue after transition
     setTimeout(() => this.#processQueue(), 350);
   }
-
-  // ─── Private ────────────────────────────────────────
 
   static #enqueue(fn) {
     this.#queue.push(fn);
@@ -102,7 +78,7 @@ class Modal {
   }
 
   static #html() {
-    return /* html */`
+    return `
       <div class="modal-overlay" id="modal-overlay">
         <div class="modal">
           <div class="modal__icon" id="modal-icon">⚔️</div>

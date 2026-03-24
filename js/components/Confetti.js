@@ -1,15 +1,10 @@
-/**
- * @class Confetti
- * @description Fires a confetti burst for level-up celebrations.
- * Self-cleaning — removes particles after animation completes.
- */
+
 class Confetti {
 
   static #COLORS  = ['#a855f7','#c084fc','#fbbf24','#60a5fa','#34d399','#f87171','#fb923c'];
   static #COUNT   = 70;
   static #container = null;
 
-  /** Lazily create and cache the overlay container. */
   static #getContainer() {
     if (!this.#container) {
       this.#container = document.createElement('div');
@@ -19,10 +14,6 @@ class Confetti {
     return this.#container;
   }
 
-  /**
-   * Launch confetti.
-   * @param {number} [count] - number of pieces (default 70)
-   */
   static launch(count = this.#COUNT) {
     const container = this.#getContainer();
 
@@ -30,14 +21,12 @@ class Confetti {
       const piece = this.#createPiece();
       container.appendChild(piece);
 
-      // Clean up after animation
       const duration = parseFloat(piece.style.animationDuration) * 1000;
       const delay    = parseFloat(piece.style.animationDelay) * 1000;
       setTimeout(() => piece.remove(), duration + delay + 200);
     }
   }
 
-  /** @returns {HTMLElement} */
   static #createPiece() {
     const el = document.createElement('div');
     el.className = 'confetti-piece';

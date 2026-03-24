@@ -1,11 +1,4 @@
-/**
- * @class CharacterCreation
- * @extends Component
- * @description The onboarding screen shown to new users.
- *
- * Emits a 'character:created' custom event on the root element
- * with { name, avatar } as detail.
- */
+
 class CharacterCreation extends Component {
 
   #selectedAvatar = 'warrior';
@@ -15,7 +8,7 @@ class CharacterCreation extends Component {
   }
 
   template() {
-    return /* html */`
+    return `
       <div class="create-box anim-fade-in">
         <h1 class="create-box__title">HabitHero</h1>
         <p class="create-box__subtitle">⚔️ Начни свою легенду ⚔️</p>
@@ -54,7 +47,7 @@ class CharacterCreation extends Component {
       { id: 'dev',     emoji: '💻', label: 'Разработчик' },
     ];
 
-    return options.map(o => /* html */`
+    return options.map(o => `
       <div
         class="avatar-option ${o.id === this.#selectedAvatar ? 'avatar-option--selected' : ''}"
         data-avatar="${o.id}"
@@ -69,7 +62,6 @@ class CharacterCreation extends Component {
   }
 
   bindEvents() {
-    // Avatar selection
     this.$$('[data-avatar]').forEach(el => {
       el.addEventListener('click', () => this.#selectAvatar(el.dataset.avatar));
       el.addEventListener('keydown', e => {
@@ -77,17 +69,14 @@ class CharacterCreation extends Component {
       });
     });
 
-    // Start button
     const btn = this.$('#btn-start');
     if (btn) btn.addEventListener('click', () => this.#handleSubmit());
 
-    // Enter key in name field
     const input = this.$('#hero-name-input');
     if (input) {
       input.addEventListener('keydown', e => {
         if (e.key === 'Enter') this.#handleSubmit();
       });
-      // Auto-focus after render
       setTimeout(() => input.focus(), 100);
     }
   }

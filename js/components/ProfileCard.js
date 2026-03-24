@@ -1,12 +1,6 @@
-/**
- * @class ProfileCard
- * @extends Component
- * @description Displays hero avatar, name, level, XP bar, gold, and streak.
- * Reacts to store updates.
- */
+
 class ProfileCard extends Component {
 
-  /** @param {string} container @param {Store} store */
   constructor(container, store) {
     super(container);
     this._store = store;
@@ -17,7 +11,7 @@ class ProfileCard extends Component {
     const xpPct = XPService.progressPercent(char.xp);
     const xpLbl = XPService.progressLabel(char.xp);
 
-    return /* html */`
+    return `
       <div class="profile-card">
         <div class="profile-card__avatar" aria-label="Аватар персонажа">
           ${char.avatarEmoji}
@@ -53,7 +47,6 @@ class ProfileCard extends Component {
   }
 
   onMount() {
-    // Animate XP bar in on first render
     const fill = this.$('#xp-bar-fill');
     if (fill) {
       const target = fill.style.width;
