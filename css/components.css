@@ -779,6 +779,15 @@
   width: 100%;
 }
 
+
+.quest-board__add-title {
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 10px;
+}
+
 .habit-form {
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);

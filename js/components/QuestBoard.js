@@ -22,14 +22,15 @@ class QuestBoard extends Component {
           <span class="quest-board__counter">Выполнено сегодня: ${character.completedToday.length}</span>
         </div>
 
+        <div class="quest-board__add-title">➕ Добавь свою привычку</div>
+        ${this.#habitForm(character)}
+
         <div class="quests-grid">${defaultCards}</div>
 
         <div class="quest-board__head quest-board__head--custom">
           <div class="section-title">🛠️ Мои привычки</div>
         </div>
         <div class="quests-grid quests-grid--custom">${customCards}</div>
-
-        ${this.#habitForm(character)}
       </section>
     `;
   }
