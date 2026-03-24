@@ -37,6 +37,16 @@ class Character {
       dev:          '💻',
       avatar_dragon: '🐉',
       avatar_robot:  '🤖',
+      avatar_knight: '🛡️',
+      avatar_wizard: '🧙',
+      avatar_ninja: '🥷',
+      avatar_viking: '🪓',
+      avatar_ghost: '👻',
+      avatar_alien: '👽',
+      avatar_pirate: '🏴‍☠️',
+      avatar_samurai: '⚔️',
+      avatar_astronaut: '👨‍🚀',
+      avatar_king: '👑'
     };
     return map[this.avatar] ?? '⚔️';
   }
