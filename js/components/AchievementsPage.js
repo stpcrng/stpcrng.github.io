@@ -1,11 +1,6 @@
-/**
- * @class AchievementsPage
- * @extends Component
- * @description Displays all achievements, locked and unlocked.
- */
+
 class AchievementsPage extends Component {
 
-  /** @param {string} container @param {Store} store */
   constructor(container, store) {
     super(container);
     this._store = store;
@@ -16,7 +11,7 @@ class AchievementsPage extends Component {
     const total   = ACHIEVEMENTS_DATA.length;
     const unlocked = AchievementService.unlockedCount(char);
 
-    return /* html */`
+    return `
       <div class="page-header">
         <h2 class="page-header__title">Достижения</h2>
         <span style="color:var(--text-2);font-size:14px">${unlocked} из ${total} открыто</span>
@@ -31,7 +26,7 @@ class AchievementsPage extends Component {
     const isUnlocked = AchievementService.isUnlocked(char, def.id);
     const isSecret   = def.secret && !isUnlocked;
 
-    return /* html */`
+    return `
       <article
         class="achievement-card ${isUnlocked ? 'achievement-card--unlocked' : 'achievement-card--locked'}"
         aria-label="${isSecret ? 'Секретное достижение' : def.name}"
