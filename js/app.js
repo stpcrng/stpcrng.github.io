@@ -84,8 +84,18 @@ class App {
     this.#questBoard = new QuestBoard(document.getElementById('quest-board-container'), this.#store);
     this.#questBoard.render();
 
-    document.getElementById('quest-board-container').addEventListener('quest:completed', e => {
+    const questContainer = document.getElementById('quest-board-container');
+    questContainer.addEventListener('quest:completed', e => {
       this.#handleQuestCompleted(e.detail.habitId);
+    });
+    questContainer.addEventListener('habit:create', e => {
+      this.#handleHabitCreate(e.detail.habit);
+    });
+    questContainer.addEventListener('habit:update', e => {
+      this.#handleHabitUpdate(e.detail.habit);
+    });
+    questContainer.addEventListener('habit:delete', e => {
+      this.#handleHabitDelete(e.detail.habitId);
     });
 
     this.#achievementsPage = new AchievementsPage(document.getElementById('page-achievements'), this.#store);
@@ -118,7 +128,7 @@ class App {
   }
 
   #handleQuestCompleted(habitId) {
-    const habit = HABITS_DATA.find(h => h.id === habitId);
+    const habit = this.#findHabitById(habitId);
     if (!habit) return;
 
     const character = this.#store.getCharacter();
@@ -148,6 +158,50 @@ class App {
     Toast.show(`✅ ${habit.name}: +${habit.xp} XP`, 'xp');
     Toast.show(`🪙 +${habit.gold} золота`, 'gold', 320);
     this.#checkAchievements();
+  }
+
+  #findHabitById(habitId) {
+    const character = this.#store.getCharacter();
+    const customHabits = character.customHabits || [];
+    return [...HABITS_DATA, ...customHabits].find(habit => habit.id === habitId) || null;
+  }
+
+  #handleHabitCreate(habit) {
+    this.#store.update(character => {
+      if (!Array.isArray(character.customHabits)) {
+        character.customHabits = [];
+      }
+      character.customHabits.push(habit);
+    });
+
+    this.#questBoard.render();
+  }
+
+  #handleHabitUpdate(habit) {
+    this.#store.update(character => {
+      if (!Array.isArray(character.customHabits)) {
+        character.customHabits = [];
+      }
+      const index = character.customHabits.findIndex(item => item.id === habit.id);
+      if (index !== -1) {
+        character.customHabits[index] = habit;
+      }
+    });
+
+    this.#questBoard.render();
+  }
+
+  #handleHabitDelete(habitId) {
+    this.#store.update(character => {
+      if (!Array.isArray(character.customHabits)) {
+        character.customHabits = [];
+      }
+      character.customHabits = character.customHabits.filter(habit => habit.id !== habitId);
+      character.completedToday = character.completedToday.filter(id => id !== habitId);
+    });
+
+    Toast.show('🗑️ Пользовательская привычка удалена.', 'err');
+    this.#questBoard.render();
   }
 
   #applyFirstQuestOfDayEffects(character) {

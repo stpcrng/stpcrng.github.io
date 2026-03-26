@@ -15,6 +15,7 @@ class Character {
     this.xpBoostExpiry = data.xpBoostExpiry ?? null;
     this.xpBoostValue = data.xpBoostValue ?? 0;
     this.streakCountedToday = data.streakCountedToday ?? false;
+    this.customHabits = data.customHabits ?? [];
   }
 
   get avatarEmoji() {
@@ -84,6 +85,7 @@ class Character {
       xpBoostExpiry: this.xpBoostExpiry,
       xpBoostValue: this.xpBoostValue,
       streakCountedToday: this.streakCountedToday,
+      customHabits: this.customHabits,
     };
   }
 
