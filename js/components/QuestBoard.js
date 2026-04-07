@@ -13,7 +13,7 @@ class QuestBoard extends Component {
     const defaultCards = HABITS_DATA.map(habit => this.#cardHTML(habit, character, false)).join('');
     const customCards = customHabits.length
       ? customHabits.map(habit => this.#cardHTML(habit, character, true)).join('')
-      : '<p class="quest-board__empty">Пока нет пользовательских привычек. Добавь первую ниже 👇</p>';
+      : '<p class="quest-board__empty">Пока нет пользовательских привычек. Добавь свою первую привычку выше ☝️</p>';
 
     return `
       <section class="quest-board">
